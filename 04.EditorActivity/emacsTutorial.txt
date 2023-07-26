@@ -1,0 +1,223 @@
+===============================================================================
+Emacs Tutorial Activity - UW Madison COMP SCI 400 (Spring 2023)
+===============================================================================
+
+Emacs has been developed by (and largely for) computer programmers over the course of almost fifty years.  Although it is often called a "text editor", Emacs supports a much broader variety of tasks: from email and web browsing to software development and game playing.
+
+Learning to effectively use this powerful and flexible tool can be a life-long journey.  So a goal through this tutorial is to help you learn to find and answer your own questions about how this tool can help you.  Downloading and installing Emacs (from https://www.gnu.org/software/emacs/) on your personal computer is a great way to get more practice with it.
+
+You can use your arrow keys to move the cursor/point down and eventually scroll to the next page of text.
+
+-- 0. Notation, Saving Progress, and Quitting ---------------------------------
+
+Many Emacs commands can be invoked with a keyboard shortcut.  For example, the shortcut "C-x C-s" can be used to save any changes made to this file.  "C-x" indicates that you should press and hold the control key on your keyboard while tapping the x-key.  Then do the same with the s-key to complete the shortcut.  Try invoking saving this file now.  You should see a confirmation message that Emacs "Wrote" to this file on the bottom line of the window.
+
+>>> Type your CSL Username at the end of this line:
+>>> Then press "C-x C-s" to save those changes.
+>>> Quit and then restart this program to confirm your changes were saved.
+    To quit use the shortcut "C-x C-c"
+    To restart, re-enter the bash command: emacs emacsTutorial.txt
+
+Every time you see a line that starts with ">>>" you should follow those instructions, and then save those edits using "C-x C-s".
+
+To quickly navigate to a specific point in any document (for example after reopening this document in Emacs), you can use the shortcut "C-s" followed by the keyword that you would like to search for.  After typing in that keyword, you can then repeatedly press "C-s" to cycle through subsequent matches.  And "C-r" can be used in a similar manner to search in the reverse direction.
+
+>>> Use "C-s abracadabra" to re-find this line after following the next step:
+>>> Close Emacs and then reopen this document in Emacs from the command line.
+
+Similar to how "C-" references the control key, many Emacs shortcuts include "M-" to indicate that you should instead press and hold the meta key.  If your keyboard doesn't have a meta key (which is likely), you can usually use the alt or option key on your keyboard instead.  (If you are using Terminal on a Mac, check the "Edit" menu for an option that enables this.)
+
+>>> Move your cursor/point to the letter a (the first letter) in: apple
+>>> Capitalize this word with the shortcut "M-c"
+>>> Move your cursor back to the a with the shortcut "M-←"
+>>> Change the entire word to be uppercase with the shortcut "M-u"
+
+You'll often see shortcuts like "M-x toggle-word-wrap".  After pressing "M-x", your cursor will move to the bottom line of the window (which is called the mini buffer).  This is where you can type the rest of the command before pressing enter to invoke it.  If you every want to cancel or quit out of a command like this, you can use "C-g" for that.
+
+>>> Enter the "M-x toggle-word-wrap" command to prevent words from being split between two lines.
+    Note that this command change how Emacs is displaying the contents of a file, and not the contents of that file.  In the next section we'll configure Emacs to wrap around words by default.
+
+Review of most useful shortcuts from this section:
+
+    "C-x C-s" saves changes of current file (mnemonic: eXecute Save)
+    "C-x C-c" close and quit Emacs (mnemonic: eXecute Close)
+
+    "C-s" before a keyword to search for that keyword (mnemonic: Search)
+    "C-r" search from bottom to top (mnemonic: Reverse search)	
+
+-- 1. Finding Help and Documentation ------------------------------------------
+
+Many of the commands, variables, and features within Emacs are well documented within Emacs itself.  In fact, this interactive help system updates in real-time to reflect the current state of your Emacs session.
+
+Keyboard shortcuts in Emacs is bound to named commands.  You can think of these commands as interactive functions that are executed whenever their shortcut is invoked.  To learn more about the command that any key sequence is bound to, press "C-h k" followed by the key sequence you are interested in.
+
+>>> Press "C-h k C-x C-s" to learn what command "C-x C-s" is bound to.
+>>> Press "C-h k C-x C-c" to learn what command "C-x C-c" is bound to.
+>>> Finish typing the name of this command here: save-
+>>> Press "C-h k C-x 1" to learn a new shortcut and command.
+>>> Then use that new command "C-x 1" to close the help window.
+
+You can look at this document and the help information at the same time because they are each presented in a different window (Emacs terminology).  You've already seen that "C-x 1" will close all other windows (other than the one that your cursor/point is inside).  Alternatively, you can use "C-x 0" to close only the window that your cursor is in, and leave any others open.   To change which window your cursor/point is currently in, you can use "C-x o".  We'll practice using this shortly.
+
+Remember the "M-x toggle-word-wrap" key sequence introduced in the last section?  If you try looking up "M-x" with "C-h k M-x", you'll find some fairly circular language about an execute-extended-command command that can be used to execute other interactive commands by name.  This allows you to invoke commands without having to memorize any shortcuts besides "M-x".
+
+If you want to learn more about a command, including what (if any) keyboard shortcuts are bound to it, you can use "C-h f" followed by any function name to review their documentation.  You can use "C-h f save-buffer" to confirm that it is bound to the shortcut "C-x C-s" on your system.  Or if you are on a system that is configured differently, you will learn about the shortcuts available on that system.
+
+>>> Check the help page for toggle-word-wrap using "C-h f toggle-word-wrap"
+>>> Move your cursor into that window using "C-x o"
+>>> Use the arrow keys to position your cursor over the "word-wrap" variable name within that help page, and then hit enter to follow that link to the documentation page for this variable.
+>>> Move your cursor over the "customize" link near the bottom of this page, and then hit enter to customize the value of this variable.
+>>> Move your cursor over the "[Toggle]" button, and then press enter a few times to toggle this variable on and off.  Ensure that it is set to "on (non-nil)" before proceeding to the next step.
+>>> Use "C-x C-s" to save these change and toggle the status of word-wrapping in your document.
+
+If you ever learn about a variable like word-wrap and want to directly jump to it's documentation, you can use "C-h v" followed by that variable's name.  You'll notice that this documentation displays the current value of this variable (similar to a debugger).  And that the customize page available for word-wrap allows you to change and save this variable's value.  The customization that you just saved will persist even after you close and reopen Emacs in the future.
+
+Review of most useful shortcuts from this section:
+
+    "C-h k" displays help for the key that follows (mnemonic: Help Keys) 
+    "C-h f" displays help for function that follows (mnemonic: Help Functions) 
+    "C-h v" displays help for variable that follows (mnemonic: Help Variables) 
+
+    "C-x 1" keep this one current window, and delete all others
+    "C-x 0" delete only this current window
+    "C-x o" cycle between windows to make a different one current
+
+-- 2. Basic Editing with Kill, Copy, Yank, and Undo ---------------------------
+
+Emacs predates some of the familiar CUA shortcut standards for common editing commands like cutting and pasting.  And although you can customize these keybindings (or use the cua-mode command to avoid conflicts with some of the other Emacs shortcuts you have learned), becoming familiar with Emacs terminology can be helpful through your broader journey.
+
+Cut and paste are the more common names for what are known as kill and yank in Emacs.  The kill-line command cuts everything from your cursor to the end of the current line, and stores a copy of that text in your kill-ring.  Then at any later time, you can insert a copy of any text from your kill-ring back into your document.
+
+>>> Move your cursor to the first comma on this line: Apple, Banana, Cherry
+>>> Use "C-k" to invoke the kill-line command
+>>> Move your cursor to the end of this line:
+>>> Use "C-y" to yank the text you previously killed there
+
+If the text that you just yanked is not the text that you wanted, you can press "M-y" to cycle through the older contents of your kill-ring.
+
+>>> Use "C-k" to kill lines 3, 2, and 1 below, in that order.  Be sure to press the up-arrow after each "C-k" so that they are interpreted as separate kills in your kill-ring. 
+1. Avocado
+2. Broccoli
+3. Celery
+>>> Move your cursor to the end of this line:
+>>> Press "C-y" to yank the last text that you killed.
+>>> Press "M-y" to change the yanked text to the previously yanked text.
+
+If you want to cut an arbitrary region of text rather than the end of a given line, you can do that by first setting a mark at one end of that region with "C-<spacebar>".  Then you can move your cursor/point to the other end of the region and press "C-w".  After this, you can use the same yank commands that you practiced above.
+
+>>> Move your cursor to the beginning of the word Bear in the next line.
+>>> Animals: Aardvark, Bear, Cat, Dog, Elephant
+>>> Use "C-<spacebar>" to set a mark.
+>>> Use "M-→" twice to move your cursor to the end of Cat.
+>>> Now use "C-w" to kill the selected region of text.
+
+If you only want to copy a region of text to your kill-ring without cutting it from your document, you can use "M-w" instead of "C-w".
+
+To undo recent edits, you can use the "C-_" or "C-/" shortcut.  Repeating this command will undo more and more previous edits until you perform any non-undo command.  After that, you'll have undos in your command history that can themselves be undone.
+
+>>> Type the numbers 1 through 6 (in that order) each on their own line below:
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> 
+>>> Next use the undo command until you have undone your typing of 4-6.
+>>> Next press a non-undo comand, for example hit the → key.
+>>> Then invoke two more undos to see your previous undos undone.
+    Doing this correctly should return your 4 and 5 back in place.
+
+Review of most useful shortcuts from this section:
+
+    "C-k" kills (aka cuts) text through the end of the current line
+    "C-y" yanks (aka pastes) the most recently killed text
+    "M-y" cycles recently yanked text through kill-ring contents
+
+    "C-<spacebar>" set a mark at one end of a text region
+    "C-w" kills all text between the last set mark and the cursor
+    "M-w" copies (without deleting) all text between the last mark and cursor
+
+    "C-_" or "C-/" undo previous changes
+
+-- 3. Better Editing with Loops and Macros ------------------------------------
+
+When comparing Emacs commands to functions in other languages, it's natural to wonder whether Emacs commands can be passed arguments.  The universal-argument command is bound to "C-u" and can be used to specify arguments that will be passed to whatever command is invoked next.  In the following example, we'll pass a numeric argument to the +-character's self-insert-command, to print out a specific number of +s.  Many editing commands make use of numeric arguments to repeat the execution of that command in this way.
+
+>>> Place your cursor/point at the beginning of the empty line below.
+
+>>> Use the command "C-u 64 #" to insert row of 64 # characters.
+
+If you ever have a complex set of commands that you need to execute repeatedly, you could write your own function.  Or you could record a short macro of yourself demonstrating the command sequence, and then replay the commands that makeup your recorded macro.  "<f3>" is the shortcut to start recording a macro and "<f4>" can be used to either 1) end the recording of a macro, when one is being recorded, or 2) play back the commands from the most recently recorded macro.  Emacs owes it's name (short for "editor macros") to this powerful feature.  Note that on many laptop keyboards there is a fn key that must be held to avoid the laptop specific controls that the function keys often share.
+
+>>> Move your cursor over the 1 in the line below.
+>>> 1 2 3 4 5 6 7 8 9 10 11 12
+>>> Press "<f3>" to start recording a macro.
+>>> Type "0" to insert a 0 before the 1, and then press the right-arrow twice.
+>>> Press "<f4>" once to stop recording, and then a second time to playback.
+>>> To insert a 0 in front of the seven remaining single digit numbers by
+>>> pressing "C-u 7 <f4>"
+
+Review of most useful shortcuts from this section:
+
+    "C-u" specifies argument that is passed to next command
+    "<f3>" starts recording a new keyboard macro
+    "<f4>" either ends recording, or plays back previous macro
+
+-- 4. Completion Packages (Optional) ------------------------------------------
+
+Out of the box, Emacs features thousands of commands.  Try typing "M-x" followed by the <tab> key to see a list of them all.  And even more functionality can be installed through packages hosted in any of many different archives.  Let's try installing a few of these packages that make it easier to learn, recall, and use several different Emacs commands.
+
+>>> Use the shortcut "C-x 2" to split this window, and keep this text in view.
+>>> Use the shortcut "C-x o" to move your cursor into the other window.
+>>> Run the command "M-x list-packages" to see a list of available packages.
+>>> Search for a package named vertico using "C-s vertico" then press <return>
+>>> With your cursor on the line listing vertico, press "i" to mark this package as one you would like to install, and then press "x" to actually install that package.
+>>> After the package is install, close that window with "C-x 0"
+>>> Next, activate Vertico: use the command "M-x vertico-mode" for this
+>>> Now try re-typing our old friend "M-x toggle-word-wrap"
+
+Notice the list of all possible commands that appears and is gradually filtered (aka narrowed) as you type?  Your most recent command is initially selected at the top of this list so "M-x <return>" should quickly re-run that last command, if you want to quickly toggle word wrap back on.  Vertico is a completion interface that provides this extra feedback whenever Emacs prompts you to enter the name of a command, file, etc.  There are two more packages that compliment Vertico, and make it even more convenient to use.
+
+Marginalia is a package that displays additional information next to each option displayed in the completion interface.  In the "M-x" list of commands, for example, it will display a brief description of each command, and the shortcut keys for those commands that have them bound.
+
+Orderless is a packages that allows the Vertico completion interface to show matches that contain the words you have typed in different orders than you typed them, and with missing words.  So if you accidentally type "M-x wrap word": forgetting the word toggle and the order of these words in the command name, Vertico will still be able to help you find the command toggle-word-wrap.
+
+>>> Use "M-x list-packages" to find and install Marginalia and Orderless
+>>> Then use "M-x marginalia-mode" to display extra information
+
+Use of orderless requires us to update an Emacs Lisp variable that contains an ordered list of completion styles.  Teaching Emacs Lisp is beyond the scope of this introduction, but I will share a few tips to help you relate to what you are writing and seeing in this code.  In a more common c-style language, you might expect a function call for a function named "push" with two arguments to look like this:
+
+    push("orderless",completion_styles)
+
+In Emacs lisp, we 1. move the opening parentheses before the function name, 2. use a single apostrophe to mark the literal name, 3. are allowed to and often use names with dashes separating words, and 4. can ditch the commas between arguments.  So the function call above looks like the following in Emacs Lisp:
+
+    (push 'orderless completion-styles)
+
+>>> Use the shortcut "M-:" then type in the above line, and then press <return>
+
+Now when you use "M-x wrap word" you'll see the command toggle-word-wrap in the resulting completion list, and you can hit <return> to invoke this command.
+
+If you'd like these new capabilities to be enabled by default when you start up Emacs, do the following:
+
+>>> Move your cursor to the beginning of the Emacs lisp code block below:
+(vertico-mode)
+(marginalia-mode)
+(push 'orderless completion-styles)
+>>> Press "C-<spacebar>" to set a mark before moving your cursor to the end of the code block, and then press "M-w" to copy this text to your kill-ring.
+>>> Use "C-x 2" and then "C-x o" to keep this tutorial visible as your work
+>>> Use "C-x C-f" to open a new file and enter the filename "~/.emacs"
+>>> Note that ~/.emacs is a special file that Emacs runs code from at startup
+>>> Use "C-y" to paste the above code into the top of ~/.emacs
+>>> Then save your changes: "C-x C-s", before closing that window with "C-x 0"
+
+Now you should see the benefits of vertico, marginalia, and orderless after closing and restarting Emacs.
+
+-- 5. Next Steps --------------------------------------------------------------
+
+Congratulations!  You have reached the end of this tutorial and embarked on your own Emacs adventure.  As you continue to use Emacs, be mindful about any possible functions or features that might be useful through your work.  It's likely that there are solutions for many such needs already built into Emacs.  And any that don't exist, can be implemented by you when you are ready.
+
+Before diving into the numerous additional tutorials, youtube videos, redit posts, and blog articles that address Emacs usage, I recommend first working through the built-in Emacs tutorial.  You can access this tutorial with the shortcut "C-h t" (although this is not a requirement for CS400).
+
+===============================================================================
+The End
+===============================================================================
